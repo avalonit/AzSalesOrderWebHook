@@ -31,7 +31,9 @@ namespace com.businesscentral
             }
 
             if (order.LastModifiedDateTime.Year != 1)
-                message.Append(String.Format("last updated {0}.", order.LastModifiedDateTime.ToString("dd/MM/yyyy HH:mm")));
+                message.Append(String.Format(", last updated {0}.", order.LastModifiedDateTime.ToString("dd/MM/yyyy HH:mm")));
+
+            message.Append(String.Format(". Please reply YES to this message if you want an order confirmation is sent to your customer."));
 
             return message.ToString();
         }
