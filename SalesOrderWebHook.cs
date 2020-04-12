@@ -34,10 +34,8 @@ namespace com.businesscentral
             }
 
             // Webhook 
-            WebHookEvent ev = null;
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            if (!String.IsNullOrEmpty(requestBody))
-                ev = (WebHookEvent)JsonConvert.DeserializeObject(requestBody);
+            var ev = !String.IsNullOrEmpty(requestBody) ? JsonConvert.DeserializeObject<WebHookEvent>(requestBody) : null;
 
             // Load configuration
             var configBuilder = new ConfigurationBuilder()
