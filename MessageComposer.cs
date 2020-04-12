@@ -35,6 +35,5 @@ namespace com.businesscentral
 
             return message.ToString();
         }
-
     }
 }

@@ -48,7 +48,7 @@ namespace com.businesscentral
 
             // Business Central is queried to get order and sale agent detail 
             var config = new ConnectorConfig(configBuilder);
-            BusinessCentraConnector centraConnector = new BusinessCentraConnector(config);
+            BusinessCentralConnector centraConnector = new BusinessCentralConnector(config);
             var order = await centraConnector.GetOrderByWebhook(ev);
             var saleAgents = await centraConnector.GetSaleagentByOrder(order);
             var saleAgent = (saleAgents != null && saleAgents.Value != null && saleAgents.Value.Count > 0) ? saleAgents.Value[0] : null;

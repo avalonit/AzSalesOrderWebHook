@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace com.businesscentral
 {
-    public class BusinessCentraConnector
+    public class BusinessCentralConnector
     {
         private ConnectorConfig config;
         private string ApiBaseEndPoint = string.Empty;
         private string AuthInfo = string.Empty;
-        public BusinessCentraConnector(ConnectorConfig config)
+        public BusinessCentralConnector(ConnectorConfig config)
         {
             this.config = config;
             this.ApiBaseEndPoint = String.Format("https://api.businesscentral.dynamics.com/{0}/{1}/", config.apiVersion1, config.tenant);
@@ -24,7 +24,6 @@ namespace com.businesscentral
 
             if (ev == null || ev.Value == null || ev.Value.Count == 0)
                 return null;
-
             if (!ev.Value[0].Resource.Contains("salesOrders"))
                 return null;
 
@@ -33,14 +32,9 @@ namespace com.businesscentral
             using (var httpClient = new HttpClient())
             {
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", this.AuthInfo);
-
                 var responseMessage = await httpClient.GetAsync(apiEndPoint);
-
                 if (responseMessage.IsSuccessStatusCode)
-                {
-                    var jsonContent = await responseMessage.Content.ReadAsStringAsync();
-                    orders = JsonConvert.DeserializeObject<SalesOrder>(jsonContent);
-                }
+                    orders = JsonConvert.DeserializeObject<SalesOrder>(await responseMessage.Content.ReadAsStringAsync());
             }
             return orders;
         }
@@ -51,7 +45,6 @@ namespace com.businesscentral
 
             if (order == null || String.IsNullOrEmpty(order.Salesperson))
                 return null;
-
             var query = String.Format("employees?$filter=number eq '{0}'", order.Salesperson);
 
             var apiEndPoint = this.ApiBaseEndPoint + query;
@@ -59,14 +52,9 @@ namespace com.businesscentral
             using (var httpClient = new HttpClient())
             {
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", this.AuthInfo);
-
                 var responseMessage = await httpClient.GetAsync(apiEndPoint);
-
                 if (responseMessage.IsSuccessStatusCode)
-                {
-                    var jsonContent = await responseMessage.Content.ReadAsStringAsync();
-                    employees = JsonConvert.DeserializeObject<Employees>(jsonContent);
-                }
+                    employees = JsonConvert.DeserializeObject<Employees>(await responseMessage.Content.ReadAsStringAsync());
             }
             return employees;
         }
