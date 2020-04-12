@@ -20,13 +20,13 @@ namespace com.businesscentral
             if (order.ShippingPostalAddress != null)
             {
                 message.Append(String.Format("shipping to {0}", order.ShipToName));
-                if (String.IsNullOrEmpty(order.ShippingPostalAddress.Street))
+                if (!String.IsNullOrEmpty(order.ShippingPostalAddress.Street))
                     message.Append(String.Format(" ", order.ShippingPostalAddress.Street));
-                if (String.IsNullOrEmpty(order.ShippingPostalAddress.City))
+                if (!String.IsNullOrEmpty(order.ShippingPostalAddress.City))
                     message.Append(String.Format(" ", order.ShippingPostalAddress.City));
-                if (String.IsNullOrEmpty(order.ShippingPostalAddress.State))
+                if (!String.IsNullOrEmpty(order.ShippingPostalAddress.State))
                     message.Append(String.Format(" ", order.ShippingPostalAddress.State));
-                if (String.IsNullOrEmpty(order.ShippingPostalAddress.CountryLetterCode))
+                if (!String.IsNullOrEmpty(order.ShippingPostalAddress.CountryLetterCode))
                     message.Append(String.Format(" ", order.ShippingPostalAddress.CountryLetterCode));
             }
 

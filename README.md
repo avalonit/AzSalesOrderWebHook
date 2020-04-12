@@ -9,4 +9,4 @@ SCENARIO
 3. The sale agent reply with a YES/NO and in case the Azure Function sends an SMS with order detail to the final customer; 
 
 The description of the project:
-https://businesscentraldotblog.wordpress.com/2020/04/10/whatsapp-integration-easy-and-fast/
+https://www.business-central.blog/2020/04/12/send-an-event-trigger-sms-by-using-azure-functions-and-the-powerful-bc-webhooks/
